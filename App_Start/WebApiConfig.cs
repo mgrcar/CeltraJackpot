@@ -5,7 +5,7 @@ using System.Web.Http;
 
 namespace EmptyMvcProject
 {
-    public static class WebApiConfig
+    /*public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
         {
@@ -15,5 +15,5 @@ namespace EmptyMvcProject
                 defaults: new { id = RouteParameter.Optional }
             );
         }
-    }
+    }*/
 }
