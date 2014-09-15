@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace EmptyMvcProject
+namespace CeltraJackpot
 {
     public class BundleConfig 
     {

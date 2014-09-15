@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyMvcProject", "EmptyMvcProject.csproj", "{D455AA53-DA69-4FE0-B157-71AF357C46FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CeltraJackpot", "CeltraJackpot.csproj", "{D455AA53-DA69-4FE0-B157-71AF357C46FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,11 +2,11 @@
 
 namespace CeltraJackpot.Controllers
 {
-    public class HomeController : Controller
+    public class ErrorController : Controller
     {
         public ActionResult Index()
         {
-            return View();
+            return Content("ERR", "text/plain");
         }
     }
 }
