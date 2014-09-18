@@ -6,11 +6,12 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
         @* CSS *@
         @Styles.Render("~/css/bootstrap")
-        <title>Some title</title>
+        <title>@ViewBag.Title</title>
     </head>
     <body>
-        This is _Layout<br />
-        @RenderBody()
+        <div class="container">
+            @RenderBody()
+        </div>
         @* JS *@
         @Scripts.Render("~/js/jquery")
         @Scripts.Render("~/js/bootstrap")

@@ -6,6 +6,7 @@ namespace CeltraJackpot.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Title = "IZZIV 1: Jackpot";
             return View();
         }
     }

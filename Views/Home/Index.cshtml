@@ -1,1 +1,115 @@
-﻿This is Home
+﻿<h1>IZZIV 1: Jackpot - koliko denarja priigra tvoj algoritem?</h1>
+
+<h2>NALOGA</h2>
+
+<p>Tvoja naloga je, da napišeš algoritem za igranje na enostavnih igralnih avtomatih.</p>
+
+<p>Na voljo imaš zaporedje igralnih avtomatov. Vsak avtomat ima neko verjetnost izplačila nagrade. Nagrada, ki jo izplača avtomat ob potegu ročice je bodisi 0 (tj. neuspel poteg ročice), bodisi 1 (tj. uspel poteg ročice). Tvoj algoritem ima na voljo končno število potegov ročice, pri čemer ob vsakem potegu lahko izbere poljubni avtomat. Naloga tvojega algoritma je, da v vnaprej določenem številu potegov maksimizira nagrado (tj. maksimizira število uspelih potegov ročice).</p>
+
+<h2>ŽELENI REZULTAT</h2>
+
+<h3>Testno razvojno okolje</h3>
+
+<p>Tvoj program mora znati komunicirati s strežnikom, ki simulira preproste igralne avtomate. Zahtevek, ki vrne nagrado (0 ali 1) ob potegu ročice, je sledeč:</p>
+
+<pre>http://celtra-jackpot.com/&lt;številka_primera>/&lt;številka_avtomata>/&lt;številka_potega></pre>
+
+<p>Odgovor na tak zahtevek je bodisi »0« (brez izplačila nagrade), bodisi »1« (izplačilo nagrade). Če so parametri napačno specificirani, strežnik odgovori z »ERR«. Pomen in vrednosti parametrov so naslednji:</p>
+
+<ul>
+<li>&lt;številka_primera>: številka testnega primera. Za potrebe razvoja in testiranja je na voljo 10 primerov. Številka testnega primera torej zavzame vrednost od 1 do 10.</li>
+<li>&lt;številka_avtomata>: številka igralnega avtomata. Pri vsakem primeru je na voljo določeno število igralnih avtomatov. Številka igralnega avtomata za določeni primer zavzame vrednost od 1 do N, kjer je N največ 10. N dobiš tako, da pošlješ naslednji zahtevek:
+<pre>http://celtra-jackpot.com/&lt;številka_primera>/machines</pre>
+</li>
+<li>&lt;številka_potega>: zaporedna številka potega ročice. Ta parameter je potreben, ker so verjetnosti izplačila nagrade nekaterih avtomatov odvisne od zaporedne številke potega ročice. Zaporedna številka potega zavzame vrednost od 1 do M, kjer je M največ 10.000. M dobiš z naslednjim zahtevkom: 
+<pre>http://celtra-jackpot.com/&lt;številka_primera>/pulls</pre>
+</li>
+</ul>
+
+<p>Pri prvi polovici testnih primerov so verjetnosti izplačila nagrade igralnih avtomatov konstantne. To pomeni, da niso odvisne od številke potega. Primer dveh takih avtomatov prikazuje naslednji graf:</p>
+
+<center><img src="~/img/img1.png" /></center>
+
+<p>Pri drugi polovici primerov pa so verjetnosti izplačila nagrade odvisne od številke potega in omogočajo testiranje prilagodljivosti algoritma na spremembe. V teh primerih so verjetnosti izplačila nagrade specificirane kot funkcije, ki so konstantne po odsekih. Primer dveh takih avtomatov prikazuje naslednji graf:</p>
+
+<center><img src="~/img/img2.png" /></center>
+
+<h3>Primer tipične komunikacije s strežnikom</h3>
+
+<p>Naslednje je primer tipične komunikacije tvojega programa z našim strežnikom:</p>
+
+<ol>
+<li>Denimo, da tvoj program rešuje primer številka 3. Da bi izvedel, koliko igralnih avtomatov je na voljo, pošlje zahtevek machines:
+    <ul>
+    <li>Zahtevek: <tt>http://celtra-jackpot.com/3/machines</tt></li>
+    <li>Odgovor: <tt>2</tt></li>
+    </ul>
+</li>
+<li>Zdaj ve, da lahko izbira med dvema igralnima avtomatoma. Da bi izvedel, koliko potegov ročice ima na voljo, pošlje zahtevek pulls: 
+    <ul>
+    <li>Zahtevek: <tt>http://celtra-jackpot.com/3/pulls</tt></li>
+    <li>Odgovor: <tt>10000</tt></li>
+    </ul>
+</li>
+<li>Zdaj ve, da lahko 10.000-krat potegne ročico, pri čemer ob vsakem potegu lahko izbere kateregakoli od obeh igralnih avtomatov. Potege ročice mora izvesti zaporedno, od prvega do zadnjega, vsakega natanko enkrat. Primer: 
+    <ul>
+    <li>Zahtevek: <tt>http://celtra-jackpot.com/3/1/1</tt></li>
+    <li>Odgovor: <tt>0</tt></li>
+    </ul>
+    <ul>
+    <li>Zahtevek: <tt>http://celtra-jackpot.com/3/1/2</tt></li>
+    <li>Odgovor: <tt>0</tt></li>
+    </ul>
+    <ul>
+    <li>Zahtevek: <tt>http://celtra-jackpot.com/3/1/3</tt></li>
+    <li>Odgovor: <tt>1</tt></li>
+    </ul>
+    <ul>
+    <li>Zahtevek: <tt>http://celtra-jackpot.com/3/1/4</tt></li>
+    <li>Odgovor: <tt>0</tt></li>
+    </ul>
+    <ul>
+    <li>...</li>
+    </ul>
+    <ul>
+    <li>Zahtevek: <tt>http://celtra-jackpot.com/3/1/10000</tt></li>
+    <li>Odgovor: <tt>0</tt></li>
+    </ul>
+</li>
+</ol>
+
+<h3>Implementacija in oddaja rešitve</h3>
+
+<p>Tvoj program mora kot edini parameter sprejeti naslov strežnika skupaj s številko primera (torej naslov v obliki "http://&lt;ime_domene>/&lt;številka_primera>").</p>
+
+<p>Rešitev lahko implementiraš v poljubnem programskem okolju (Java, Scala, C#, Python...), če nas le uspeš naučiti, kako tvoj program zaženemo (s priloženimi navodili in/ali skripto za prevajanje in zagon).</p>
+
+<p>Primer: če programiraš v Javi, Scali ali kakem drugem okolju, ki je vezano na Javin virtualni stroj (JVM), potem nam lahko pošlješ kar fat JAR, ki poleg tvojega algoritma vsebuje še vse knjižnice, od katerih je odvisen.</p>
+
+<h2>KRITERIJI OCENJEVANJA</h2>
+
+<p>Naše evalvacijsko okolje je zelo podobno testnemu okolju. Pripravili smo 10 evalvacijskih primerov, 5 s konstantnimi verjetnostmi izplačila nagrade in 5 s spremenljivimi verjetnostmi izplačila nagrade. Tako kot v testnem okolju, je največje število avtomatov (N) pri nekem primeru 10, največje število potegov ročice (M) pa 10.000. Osnovna razlika pa je seveda v tem, da so evalvacijski primeri drugačni od testnih, zato mora biti tvoja rešitev splošna in ne prilagojena testnim primerom.</p>
+
+<p>Tvoj program mora upoštevati naslednje omejitve:</p>
+
+<ul>
+<li>Tvoj program lahko pošlje zahtevka machines in pulls poljubnokrat. Zahtevke za poteg ročice pa mora poslati zaporedno, od prvega do zadnjega, vsakega natanko enkrat. V fazi evalvacije bomo programe, ki se ne bodo tako obnašali, izključili iz tekmovanja.</li>
+<li>V fazi evalvacije lahko med dvema zahtevkoma poteče največ 500 milisekund časa.</li>
+</ul>
+
+<p>Rešitve bomo ocenjevali iz dveh zornih kotov: kvantitativno (nagrada, osvojena na evalvacijskih primerih) in kvalitativno (drugi aspekti tvojega izdelka). Naša kvantitativna evalvacijska funkcija je dokaj enostavna. Tvoj program bomo zagnali 10-krat, enkrat za vsak evalvacijski primer, in prešteli uspele potege ročice preko vseh primerov (tj. izračunali osvojeno nagrado). Celoten postopek bomo večkrat ponovili in na koncu izračunali povprečen izkupiček tvojega algoritma.</p>
+
+<p>Kvalitativno oceno pa bomo določili po naslednjih kriterijih:</p>
+
+<ul>
+<li>upoštevanje zahtev in funkcionalnosti</li>
+<li>izvirnost rešitve</li>
+<li>enostavnost uporabe in priložena navodila za zagon</li>
+<li>berljivost izvorne kode in verzioniranje (priporočamo GitHub)</li>
+</ul>
+
+<h2>KAKO JE TA IZZIV POVEZAN S CELTRO?</h2>
+
+<p>V Celtri smo razvili sistem DCO (Dynamic Creative Optimization), ki služi serviranju optimiziranih oglasov. Ta sistem uporabniku našega orodja za izdelavo oglasov (AdCreator 4) omogoča, da v okviru nekega oglasa izdela več različnih variant istega oblikovnega ali vsebinskega elementa (npr. uvodne slike, videa, teksta na gumbu, privzete slike galerije). Sistem DCO se tekom oglasne kampanje nauči, katera kombinacija oblikovnih in vsebinskih elementov oglasa je za določeni krog prejemnikov bolj privlačna. Tako lahko sporočilo in izgled oglasa prilagodimo prejemniku, kar poveča verjetnost interakcije z oglasom (npr. ogled videa, klik na gumb, ogled slik v galeriji).</p>
+
+<p>Analogija z izzivom pa je sledeča. Denimo, da je v okviru nekega oglasa na voljo več različnih variant istega gumba. V analogiji z izzivom so te variante kot skupina igralnih avtomatov. DCO se ob zahtevku za serviranje oglasa odloči za eno od teh variant. To je analogno potegu ročice na določenem igralnem avtomatu. Če prejemnik oglasa na gumb pritisne, je to analogno uspelemu potegu ročice (torej izplačilu nagrade). Če ne, je to analogno neuspelemu potegu ročice (torej brez izplačila nagrade). Naloga sistema DCO je servirati čim večje število oglasov, ki spodbudijo prejemnika k interakciji, v analogiji torej čim večkrat uspešno potegniti ročico in tako požeti čim večjo nagrado.</p>
