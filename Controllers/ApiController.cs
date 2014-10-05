@@ -10,7 +10,7 @@ namespace CeltraJackpot.Controllers
 
         private int _Pulls(int exampleNumber)
         {
-            int pulls = 0;
+            int pulls = -1;
             switch (exampleNumber)
             {
                 case 1:
@@ -51,7 +51,7 @@ namespace CeltraJackpot.Controllers
         public object Pulls(int exampleNumber)
         {
             int pulls = _Pulls(exampleNumber);
-            if (pulls == 0) { return Content("ERR", "text/plain"); }
+            if (pulls == -1) { return Content("ERR", "text/plain"); }
             return Content(pulls.ToString(), "text/plain");
         }
 
@@ -99,7 +99,7 @@ namespace CeltraJackpot.Controllers
 
         public object Pull(int exampleNumber, int machineNumber, int pullNumber)
         {
-            double p = 0;
+            double p = -1;
             int pulls = _Pulls(exampleNumber);
             if (pullNumber <= 0 || pullNumber > pulls) { return Content("ERR", "text/plain"); }
             double progress = (double)pullNumber / (double)pulls;
@@ -329,7 +329,7 @@ namespace CeltraJackpot.Controllers
                     }
                     break;
             }
-            if (p == 0) { return Content("ERR", "text/plain"); }
+            if (p == -1) { return Content("ERR", "text/plain"); }
             // generate reward randomly
             int reward = mRng.NextDouble() < p ? 1 : 0;
             return Content(reward.ToString(), "text/plain");
