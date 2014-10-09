@@ -1,4 +1,6 @@
-﻿<h1>CELTRIN PROGRAMERSKI IZZIV</h1>
+﻿<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">&times;</button>Na tej spletni strani so na voljo navodila z zadnjimi pojasnili in popravki. Pojasnila in popravki so jasno označeni.</div>
+
+<h1>CELTRIN PROGRAMERSKI IZZIV</h1>
 
 <h1>IZZIV 1: Jackpot - koliko denarja priigra tvoj algoritem?</h1>
 
@@ -20,10 +22,10 @@
 
 <ul>
 <li>&lt;številka_primera>: številka testnega primera. Za potrebe razvoja in testiranja je na voljo 10 primerov. Številka testnega primera torej zavzame vrednost od 1 do 10.</li>
-<li>&lt;številka_avtomata>: številka igralnega avtomata. Pri vsakem primeru je na voljo določeno število igralnih avtomatov. Številka igralnega avtomata za določeni primer zavzame vrednost od 1 do N, kjer je N največ 10. N dobiš tako, da pošlješ naslednji zahtevek:
+<li>&lt;številka_avtomata>: številka igralnega avtomata. Pri vsakem primeru je na voljo določeno število igralnih avtomatov. Številka igralnega avtomata za določeni primer zavzame vrednost od 1 do <em>N</em>, kjer je <em>N</em> največ 10. <em>N</em> dobiš tako, da pošlješ naslednji zahtevek:
 <pre>http://celtra-jackpot.com/&lt;številka_primera>/machines</pre>
 </li>
-<li>&lt;številka_potega>: zaporedna številka potega ročice. Ta parameter je potreben, ker so verjetnosti izplačila nagrade nekaterih avtomatov odvisne od zaporedne številke potega ročice. Zaporedna številka potega zavzame vrednost od 1 do M, kjer je M največ 10.000. M dobiš z naslednjim zahtevkom: 
+<li>&lt;številka_potega>: zaporedna številka potega ročice. Ta parameter je potreben, ker so verjetnosti izplačila nagrade nekaterih avtomatov odvisne od zaporedne številke potega ročice. Zaporedna številka potega zavzame vrednost od 1 do <em>M</em>, kjer je <em>M</em> največ <mark>30.000</mark>. <em>M</em> dobiš z naslednjim zahtevkom: 
 <pre>http://celtra-jackpot.com/&lt;številka_primera>/pulls</pre>
 </li>
 </ul>
@@ -59,7 +61,7 @@
     <li>Odgovor: <tt>0</tt></li>
     </ul>
     <ul>
-    <li>Zahtevek: <tt>http://celtra-jackpot.com/3/1/2</tt></li>
+    <li>Zahtevek: <tt>http://celtra-jackpot.com/3/2/2</tt></li>
     <li>Odgovor: <tt>0</tt></li>
     </ul>
     <ul>
@@ -74,7 +76,7 @@
     <li>...</li>
     </ul>
     <ul>
-    <li>Zahtevek: <tt>http://celtra-jackpot.com/3/1/10000</tt></li>
+    <li>Zahtevek: <tt>http://celtra-jackpot.com/3/2/10000</tt></li>
     <li>Odgovor: <tt>0</tt></li>
     </ul>
 </li>
@@ -90,13 +92,14 @@
 
 <h2>KRITERIJI OCENJEVANJA</h2>
 
-<p>Naše evalvacijsko okolje je zelo podobno testnemu okolju. Pripravili smo 10 evalvacijskih primerov, 5 s konstantnimi verjetnostmi izplačila nagrade in 5 s spremenljivimi verjetnostmi izplačila nagrade. Tako kot v testnem okolju, je največje število avtomatov (N) pri nekem primeru 10, največje število potegov ročice (M) pa 10.000. Osnovna razlika pa je seveda v tem, da so evalvacijski primeri drugačni od testnih, zato mora biti tvoja rešitev splošna in ne prilagojena testnim primerom.</p>
+<p>Naše evalvacijsko okolje je zelo podobno testnemu okolju. Pripravili smo 10 evalvacijskih primerov, 5 s konstantnimi verjetnostmi izplačila nagrade in 5 s spremenljivimi verjetnostmi izplačila nagrade. Tako kot v testnem okolju, je največje število avtomatov (<em>N</em>) pri nekem primeru 10, največje število potegov ročice (<em>M</em>) pa <mark>30.000</mark>. Osnovna razlika pa je seveda v tem, da so evalvacijski primeri drugačni od testnih, zato mora biti tvoja rešitev splošna in ne prilagojena testnim primerom.</p>
 
 <p>Tvoj program mora upoštevati naslednje omejitve:</p>
 
 <ul>
-<li>Tvoj program lahko pošlje zahtevka machines in pulls poljubnokrat. Zahtevke za poteg ročice pa mora poslati zaporedno, od prvega do zadnjega, vsakega natanko enkrat. V fazi evalvacije bomo programe, ki se ne bodo tako obnašali, izključili iz tekmovanja.</li>
+<li>Tvoj program lahko pošlje zahtevka <em>machines</em> in <em>pulls</em> poljubnokrat. Zahtevke za poteg ročice pa mora poslati zaporedno, od prvega do zadnjega, vsakega natanko enkrat. V fazi evalvacije bomo programe, ki se ne bodo tako obnašali, izključili iz tekmovanja.</li>
 <li>V fazi evalvacije lahko med dvema zahtevkoma poteče največ 500 milisekund časa.</li>
+<li><mark>Ni se dovoljeno ozirati na številko primera.</mark> Tvoj algoritem torej ne sme narediti česa takega kot "IF (exampleNum <= 5) THEN my_first_algo(); ELSE my_second_algo();".</li>
 </ul>
 
 <p>Rešitve bomo ocenjevali iz dveh zornih kotov: kvantitativno (nagrada, osvojena na evalvacijskih primerih) in kvalitativno (drugi aspekti tvojega izdelka). Naša kvantitativna evalvacijska funkcija je dokaj enostavna. Tvoj program bomo zagnali 10-krat, enkrat za vsak evalvacijski primer, in prešteli uspele potege ročice preko vseh primerov (tj. izračunali osvojeno nagrado). Celoten postopek bomo večkrat ponovili in na koncu izračunali povprečen izkupiček tvojega algoritma.</p>
