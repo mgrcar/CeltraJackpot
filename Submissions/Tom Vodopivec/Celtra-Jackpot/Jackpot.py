@@ -17,6 +17,7 @@ url=sys.argv[1];
 try:
     server=url.split("/")[2]
     case=int(url.split("/")[3])
+    prefix=sys.argv[2]
 except:
     print "Wrong argument format!"
     print "Use form: http://celtra-jackpot.com/<case>"
@@ -39,9 +40,9 @@ solv_param_num_inputs = [2, 2, 1, 0, 0]
 
 #connect to server
 print "Fetching case "+str(case)+" data..."
-num_bandits=getNumMachines(server,case)
+num_bandits=getNumMachines(server,case,prefix)
 print "Number of machines: "+str(num_bandits)
-max_pulls=getNumPulls(server,case)
+max_pulls=getNumPulls(server,case,prefix)
 print "Maximum number of pulls: "+str(max_pulls)
 
 s=connect(server)
@@ -70,7 +71,7 @@ for p in xrange(max_pulls) :
 
     selected_bandit = solver.selectBandit()         #apply selection policy
 
-    reward=getMachineResponse(s, server, case, selected_bandit+1, p+1)
+    reward=getMachineResponse(s, server, case, selected_bandit+1, p+1, prefix)
     print "Pull: "+str(p+1)+" reward: "+str(reward)
     solver.update(selected_bandit, reward, 1)
     total_reward += reward

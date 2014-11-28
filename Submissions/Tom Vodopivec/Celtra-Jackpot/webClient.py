@@ -3,9 +3,10 @@ import urllib
 import socket
 
 #get number of machines available in the case
-def getNumMachines(server,case):
+def getNumMachines(server,case,prefix):
     try:
-        response = urllib2.urlopen("http://"+server+"/" + str(case) + '/machines')
+	print "http://"+server+"/" + prefix + "/" + str(case) + '/machines'
+        response = urllib2.urlopen("http://"+server+"/" + prefix + "/" + str(case) + '/machines')
         numMachines = response.read()
         if numMachines != 'ERR':
             return int(numMachines)
@@ -16,9 +17,9 @@ def getNumMachines(server,case):
     return -1
 
 #get number of pulls available in the case
-def getNumPulls(server,case):
+def getNumPulls(server,case,prefix):
     try:
-        response = urllib2.urlopen("http://"+server+"/" + str(case) + '/pulls')
+        response = urllib2.urlopen("http://"+server+"/" + prefix + "/" + str(case) + '/pulls')
         numPulls = response.read()
         if numPulls != 'ERR':
             return int(numPulls)
@@ -41,8 +42,8 @@ def disconnect(s):
     s.close()
 
 
-def getMachineResponse(s, server, case, machine, pull):
-    args=str(case)+'/'+str(machine)+'/'+str(pull)
+def getMachineResponse(s, server, case, machine, pull, prefix):
+    args=prefix+"/"+str(case)+'/'+str(machine)+'/'+str(pull)
     try:
         s.send("GET /%s HTTP/1.1\r\nHost: %s\r\n\r\n" % (args, server))
         data = s.recv(1024)
