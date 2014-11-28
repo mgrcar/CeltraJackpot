@@ -1,0 +1,1 @@
+Jackpot.exe http://celtra-jackpot.com/10
