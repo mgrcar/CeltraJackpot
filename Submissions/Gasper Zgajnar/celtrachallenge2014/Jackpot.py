@@ -3,9 +3,9 @@ __author__ = 'Gasper Zgajnar, 63090178'
 import urllib2
 import random
 import time
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import sys
-from scipy.fftpack import fft
+#from scipy.fftpack import fft
 
 config = {
     "server": "http://celtra-jackpot.com",
@@ -348,8 +348,8 @@ def algorithm_4(config, example, n_machines, n_pulls):
 
         pulse.append((sp1[i]+p1[i])/2)
 
-    plt.plot(r, p1, "r", r, sp1, "b", r, h1, "g")
-    plt.show()
+    #plt.plot(r, p1, "r", r, sp1, "b", r, h1, "g")
+    #plt.show()
     return n_positive, n_all
 #-----------------------------------------------------------#
 
