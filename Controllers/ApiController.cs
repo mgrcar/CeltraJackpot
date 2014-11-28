@@ -1,12 +1,60 @@
 ﻿using System.Web.Mvc;
 using System;
+using System.IO;
+using System.Configuration;
 
 namespace CeltraJackpot.Controllers
 {
     public class ApiController : Controller
     {
+        private static string mOutputFolder
+            = ConfigurationManager.AppSettings["OutputFolder"].TrimEnd('\\');
         private static Random mRng
             = new Random();
+
+        private string GetFileName(string ext)
+        {
+            return mOutputFolder + "\\" + Request.RawUrl.ToLower().Split('/')[2] + "." + ext;
+        }
+
+        private void WriteMsg(string fileNameExt, string msg, DateTime time)
+        {
+            using (StreamWriter w = new StreamWriter(GetFileName(fileNameExt), /*append=*/true))
+            {
+                w.WriteLine("{0:dd-MM HH:mm:ss} " + msg, time);
+            }
+        }
+
+        private void WriteLogMsg(string msg)
+        {
+            WriteMsg("log", msg, DateTime.Now);
+        }
+
+        private void WriteErrMsg(string msg)
+        {
+            DateTime time = DateTime.Now;
+            WriteMsg("err", msg, time);
+            WriteMsg("log", "ERR " + msg, time);
+        }
+
+        private int GetExpectedPullNumber()
+        {
+            int pull = 1;
+            try { pull = Convert.ToInt32(System.IO.File.ReadAllText(GetFileName("pull"))); } catch { }
+            return pull;        
+        }
+
+        private void IncExpectedPullNumber(int expectedPullNumber)
+        {
+            System.IO.File.WriteAllText(GetFileName("pull"), (expectedPullNumber + 1).ToString());
+        }
+
+        private void IncReward()
+        {
+            int rew = 0;
+            try { rew = Convert.ToInt32(System.IO.File.ReadAllText(GetFileName("rew"))); } catch { }
+            System.IO.File.WriteAllText(GetFileName("rew"), (rew + 1).ToString());
+        }
 
         private int _Pulls(int exampleNumber)
         {
@@ -50,13 +98,26 @@ namespace CeltraJackpot.Controllers
 
         public object Pulls(int exampleNumber)
         {
+            WriteLogMsg(string.Format("Pulls({0}) was called.", exampleNumber));
             int pulls = _Pulls(exampleNumber);
-            if (pulls == -1) { return Content("ERR", "text/plain"); }
+            if (pulls == -1) { WriteErrMsg("Invalid example number in pulls."); return Content("ERR", "text/plain"); }
             return Content(pulls.ToString(), "text/plain");
+        }
+
+        public object Reset()
+        {
+            System.IO.File.Delete(GetFileName("pull"));
+            return Content("OK", "text/plain");
+        }
+
+        public object Who()
+        { 
+            return Content(new FileInfo(GetFileName("pull")).FullName, "text/plain");
         }
 
         public object Machines(int exampleNumber)
         {
+            WriteLogMsg(string.Format("Machines({0}) was called.", exampleNumber));
             int machines;
             switch (exampleNumber)
             {
@@ -92,6 +153,7 @@ namespace CeltraJackpot.Controllers
                     machines = 10;
                     break;
                 default:
+                    WriteErrMsg("Invalid example number in machines.");
                     return Content("ERR", "text/plain");
             }
             return Content(machines.ToString(), "text/plain");
@@ -99,9 +161,13 @@ namespace CeltraJackpot.Controllers
 
         public object Pull(int exampleNumber, int machineNumber, int pullNumber)
         {
+            WriteLogMsg(string.Format("Pull({0},{1},{2}) was called.", exampleNumber, machineNumber, pullNumber));
+            int expectedPullNumber = GetExpectedPullNumber();
+            if (pullNumber != expectedPullNumber) { WriteErrMsg(string.Format("Invalid pull number (expected: {0}, actual: {1}).", expectedPullNumber, pullNumber)); return Content("ERR " + pullNumber + " <> " + expectedPullNumber, "text/plain"); }
+            IncExpectedPullNumber(expectedPullNumber);
             double p = -1;
             int pulls = _Pulls(exampleNumber);
-            if (pullNumber <= 0 || pullNumber > pulls) { return Content("ERR", "text/plain"); }
+            if (pullNumber <= 0 || pullNumber > pulls) { WriteErrMsg("Pull number out of bounds."); return Content("ERR", "text/plain"); }
             double progress = (double)pullNumber / (double)pulls;
             switch (exampleNumber) 
             { 
@@ -329,9 +395,10 @@ namespace CeltraJackpot.Controllers
                     }
                     break;
             }
-            if (p == -1) { return Content("ERR", "text/plain"); }
+            if (p == -1) { WriteErrMsg("Invalid example number and/or machine number."); return Content("ERR", "text/plain"); }
             // generate reward randomly
             int reward = mRng.NextDouble() < p ? 1 : 0;
+            if (reward == 1) { IncReward(); }
             return Content(reward.ToString(), "text/plain");
         }
     }

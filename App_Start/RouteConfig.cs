@@ -15,13 +15,13 @@ namespace CeltraJackpot
 
             routes.MapRoute(
                 name: "Api1",
-                url: "{exampleNumber}/{action}",
+                url: "{instance}/{exampleNumber}/{action}",
                 defaults: new { controller = "Api" },
-                constraints: new { exampleNumber = "\\d+", action = "Machines|Pulls" }
+                constraints: new { exampleNumber = "\\d+", action = "Machines|Pulls|Who|Reset" }
             );
             routes.MapRoute(
                 name: "Api2",
-                url: "{exampleNumber}/{machineNumber}/{pullNumber}",
+                url: "{instance}/{exampleNumber}/{machineNumber}/{pullNumber}",
                 defaults: new { controller = "Api", action = "Pull" },
                 constraints: new { exampleNumber = "\\d+", machineNumber = "\\d+", pullNumber = "\\d+" }
             );
