@@ -41,7 +41,7 @@ history_of_pulls = [0.0] * number_of_machines
 
 last_machine = 0
 last_val = 0
-for pull_number in range(1, number_of_pulls):
+for pull_number in range(1, number_of_pulls + 1):
 
     history = []
     for a, b in enumerate(history_of_wins):
