@@ -1,7 +1,7 @@
 
 /**
  * Created with IntelliJ IDEA.
- * User: Matej Kočevar
+ * User: Matej Kocevar
  * Date: 19.9.2014
  * Time: 20:33
  */
