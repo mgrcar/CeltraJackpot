@@ -1,0 +1,4 @@
+machine 1: 0.019900
+machine 2: 0.017450
+machine 3: 0.023750
+machine 4: 0.022800

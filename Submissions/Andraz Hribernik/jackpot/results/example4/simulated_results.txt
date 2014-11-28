@@ -1,0 +1,15 @@
+repeat: 20
+usb1: 211.2
+ucb2 a=0.05: 208.1
+ucb2 a=0.1: 213.15
+ucb2 a=0.3: 213.6
+ucb2 a=0.5: 212.05
+ucb2 a=0.7: 210.2
+rpm: 221.55
+
+repeat: 20
+rpm: 220.35
+rpmTime: 0.1: 212.7
+rpmTime: 0.15: 213.65
+rpmTime: 0.2: 210.85
+rpmTime: 0.3: 210.65

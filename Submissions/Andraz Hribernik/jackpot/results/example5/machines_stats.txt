@@ -1,0 +1,10 @@
+machine 1: 0.010420
+machine 2: 0.010300
+machine 3: 0.010020
+machine 4: 0.010260
+machine 5: 0.010540
+machine 6: 0.009480
+machine 7: 0.009360
+machine 8: 0.010180
+machine 9: 0.009520
+machine 10: 0.012880

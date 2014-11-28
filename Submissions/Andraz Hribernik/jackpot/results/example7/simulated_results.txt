@@ -1,0 +1,26 @@
+repeat: 20
+usb1: 802.7
+ucb2 a=0.05: 852.9
+ucb2 a=0.1: 835.15
+ucb2 a=0.3: 820.0
+ucb2 a=0.5: 806.3
+ucb2 a=0.7: 781.8
+exp3 a=0.1: 745.35
+exp3 a=0.3: 748.4
+rpm: 768.85
+rpmTime: 0.1: 842.55
+rpmTime: 0.2: 845.5
+rpmTime: 0.3: 796.05
+
+Correct dist
+repeat: 20
+usb1: 432.25
+ucb2 a=0.05: 483.3
+ucb2 a=0.1: 475.95
+ucb2 a=0.3: 459.55
+ucb2 a=0.5: 450.8
+ucb2 a=0.7: 435.6
+exp3 a=0.1: 440.5
+exp3 a=0.3: 429.7
+rpm: 427.6
+rpmTime: 0.1: 470.75
