@@ -37,6 +37,11 @@ namespace CeltraJackpot.Controllers
             WriteMsg("log", "ERR " + msg, time);
         }
 
+        private void Done()
+        {
+            WriteMsg("done", "", DateTime.Now);
+        }
+
         private int GetExpectedPullNumber()
         {
             int pull = 1;
@@ -399,6 +404,7 @@ namespace CeltraJackpot.Controllers
             // generate reward randomly
             int reward = mRng.NextDouble() < p ? 1 : 0;
             if (reward == 1) { IncReward(); }
+            if (pullNumber == pulls) { Done(); }
             return Content(reward.ToString(), "text/plain");
         }
     }
