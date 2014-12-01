@@ -1,0 +1,117 @@
+﻿/* Styles for circular progress bar
+-----------------------------------------------------------*/
+
+.circular-progress {
+    width: 100px;
+    margin: 6px 6px 20px;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.circular-progress canvas {
+    vertical-align: top;
+}
+
+.circular-progress strong {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    line-height: 40px;
+    font-size: 30px;
+}
+
+.circular-progress strong i {
+    font-style: normal;
+    font-size: 0.6em;
+    font-weight: normal;
+}
+
+.log-table-limited {
+    height: 300px;
+    margin-top: 10px;
+    overflow: auto;
+    position: relative;
+}
+
+.jumbotron {
+    padding-top: 5px;
+    padding-bottom: 15px;
+}
+
+#selectionModalBody
+{
+    height: 300px;
+    overflow: auto;
+    position: relative;
+}
+
+/* conflict with bootstrap */
+/*
+body {
+    font-size: .85em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    color: #232323;
+    background-color: #fff;
+}
+
+header, footer, nav, section {
+    display: block;
+}
+*/
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+/*
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+*/
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+/*
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+*/

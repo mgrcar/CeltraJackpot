@@ -1,0 +1,404 @@
+﻿@{
+    ViewBag.Title = "Celtra Jackpot Player";
+}
+
+<div class="jumbotron">
+    <h2>@ViewBag.Title</h2>
+</div>
+
+<h2>Play</h2>
+
+<!-- form for submiting the game address -->
+<form class="form-horizontal" role="form" id="post-form">
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="address">Game Server:</label>
+        <div class="col-sm-6">
+            <input class="form-control" placeholder="Address" type="text" id="address">
+        </div>
+        <div class="col-sm-2">
+            <button class="btn btn-default" type="submit" id="post-play">Play</button>
+        </div>
+        <div class="col-sm-2">
+            <button class="btn btn-default" type="submit" id="post-delete">Delete game data</button>
+        </div>
+    </div>
+</form>
+
+<!-- when game is running a progress bar will be displayed -->
+<div class="row" id="circular-progress-main">
+    <div class="col-md-2 col-md-offset-5">
+        <div class="circular-progress">
+            <strong></strong>
+        </div>
+    </div>
+</div>
+<div class="address-alert">
+    <div id="address-alert-msg"></div>
+</div>
+<hr />
+<h2>Log</h2>
+
+<!-- this log section will be replaced by the _LogPartial with log information from the db-->
+<div class="log-parent">
+    <div class="log-section">
+        <div class="log-alert">
+            <div class="alert alert-info" role="alert">
+                <strong>Loading</strong>
+                <div>
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<hr />
+<h2>Statistics</h2>
+
+<!-- form for selecting the game address -->
+<form class="form-horizontal" role="form" id="post-form-stat">
+    <div class="form-group">
+        <label class="control-label col-sm-2">Select played game:</label>
+        <div class="col-sm-6">
+            <div class="statGames">
+                <select class="selectpicker" data-width="100%" id="stat-game-selector"></select>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <button class="btn btn-default" type="submit" id="post-display-stat">Display</button>
+        </div>
+        <div class="col-sm-2">
+            <button class="btn btn-default" type="submit" id="post-display-selection">Generate Machine Pulls</button>
+        </div>
+    </div>
+</form>
+<div class="stat-alert">
+    <div id="sta-alert-msg"></div>
+</div>
+
+
+<div class="statisticsCharts"></div>
+
+<!-- -->
+<!-- Modal dialog for error messaging -->
+<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content panel-danger">
+            <div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="alertModalLabel">Error</h4>
+            </div>
+            <div class="modal-body">
+                An error occured. Please check the log if more information is available.  
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal dialog for machine selection -->
+<div class="modal fade" id="selectionModal" tabindex="-1" role="dialog" aria-labelledby="selectionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content panel-info">
+            <div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="selectionModalLabel">Generated machine selections for each pull</h4>
+            </div>
+            <div class="modal-body" id="selectionModalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- hidden input for result storing-->
+<input type="hidden" class="returned-value">
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            //enable selectpicker
+            $('.selectpicker').selectpicker();
+
+            $('#circular-progress-main').hide();
+
+            // if the progress was not started on this page refresh after the computation elsewhere is finished
+            var startedOnThisPage = false;
+
+            // at the begining: update log + check if there is already a game running
+            updateLog();
+            isPlayerPlaying();
+            updateStatisticsAddressList();
+
+            // checks if the player is playing the game -> disable input if he is and show progress (prevent two games at the same time)
+            function isPlayerPlaying() {
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("PlayerPlaying", "Play")",
+                })
+                    .success(function (response) {
+                        if (response == "True") {
+                            modifyPlayerProgress();
+                            $('#post-form').hide();
+                            $('#circular-progress-main').show();
+                        }
+                        else {
+                            $('#circular-progress-main').hide();
+                            $('#post-form').show();
+                            if (!startedOnThisPage) {
+                                updateLog();
+                                updateStatisticsAddressList();
+                            }
+                            startedOnThisPage = false;
+                        }
+                    })
+                    .error(function () {
+                        $('#circular-progress-main').hide();
+                        $('#post-form').show();
+                        $('#alertModal').modal('toggle');
+                    });
+            }
+
+            // start the player on the server side + start the progress circle
+            $('#post-play').on("click", function () {
+
+                var address = $('#address').val();
+
+                if (address == "" || typeof address === "undefined") {
+                    $('.address-alert').replaceWith('<div class="address-alert">﻿<div class="alert alert-warning alert-dismissible" id="address-alert-msg"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Warning!</strong> Please insert a valid game address.</div></div>');
+                    autoCloseAlert('#address-alert-msg', 10000);
+                }
+                else {
+                    $('#post-form').hide();
+
+                    $('#circular-progress-main').show();
+                    setCircularProgress(0);
+                    startedOnThisPage = true;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("Start", "Play")",
+                        data: { address: address },
+                    })
+                        .success(function (response) {
+                            $('.returned-value').val(response);
+                            updateLog();
+                            updateStatisticsAddressList();
+                            $('#post-form').show();
+                            $('#circular-progress-main').hide();
+
+                            if (response == "ERR") {
+                                displayBadAddress();
+                            }
+                        })
+                        .error(function () {
+                            $('.returned-value').val("ERR");
+                            updateLog();
+                            $('#alertModal').modal('toggle');
+                            $('#post-form').show();
+                            $('#circular-progress-main').hide();
+
+                            displayBadAddress();
+                        });
+
+                    setTimeout(isPlayerPlaying, 500);
+                }
+
+                return false;
+            });
+
+            // check for player progress and update circular progressbar accordingly
+            function modifyPlayerProgress() {
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("PlayerProgress", "Play")",
+                })
+                        .success(function (response) {
+                            setCircularProgress(response);
+                            setTimeout(isPlayerPlaying, 500);
+                        });
+            }
+
+            // set circular progressbar progress
+            function setCircularProgress(progressVal) {
+                progressVal = progressVal / 100.0;
+
+                $('.circular-progress').circleProgress({
+                    value: progressVal,
+                    fill: { gradient: ['#0681c4', '#07c6c1'] },
+                    animation: { duration: 0, easing: 'circleProgressEasing' }
+                }).on('circle-animation-progress', function (event, progress, stepValue) {
+                    $(this).find('strong').html(parseInt(String(stepValue.toFixed(2)).substr(1).valueOf() * 100) + '<i>%</i>');
+                });
+            }
+
+            // retrieve latest logs from database and display them
+            function updateLog() {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Log", "Play")",
+                    data: ""
+                })
+                    .success(function (response) {
+                        $('.log-section').replaceWith(response);
+                    })
+                    .error(function () {
+                        $('.log-section').replaceWith('<div class="log-section"><div class="log-alert"><div class="alert alert-info" role="alert"><strong>Connection error</strong><div>Log could not be displayed!</div></div></div></div>');
+                    });
+            }
+
+            // expansion of log table
+            $('.log-parent').on('click', '#expand-log', function () {
+                if ($('button span').hasClass('glyphicon-chevron-down')) {
+                    $('#expand-log').html('<span class="glyphicon glyphicon-chevron-up"></span> Close Log History');
+                }
+                else {
+                    $('#expand-log').html('<span class="glyphicon glyphicon-chevron-down"></span> Expand Log History');
+                }
+            });
+
+            //popolates the list of played games
+            function updateStatisticsAddressList() {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Games", "Statistics")",
+                    data: "",
+                })
+                    .success(function (response) {
+
+                        $('.statGames').replaceWith(response);
+                        $('.selectpicker').selectpicker();
+                        // display statistics for the latest
+                        var address = $('#stat-game-selector option:first-child').val();
+                        if (address != "" && typeof address !== "undefined") {
+                            drawStatisticsCharts(address);
+                        }
+                    })
+                    .error(function () {
+                        $('.statGames').replaceWith('<div class="statGames"><select class="selectpicker" data-width="100%" id="stat-game-selector"></select></div>');
+                    });
+            }
+
+            // draw the statistics partial with charts
+            function drawStatisticsCharts(address) {
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("GameCharts", "Statistics")",
+                    data: { address: address },
+                })
+                    .success(function (response) {
+                        $('.statisticsCharts').replaceWith(response);
+                    })
+                    .error(function () {
+                        $('.statisticsCharts').replaceWith('<div class="statisticsCharts"><div class="alert alert-info" role="alert"><strong>Connection error</strong><div>Graphs could not be displayed!</div></div></div>');
+                    });
+            }
+
+            // display statistics for selected game
+            $('#post-display-stat').on("click", function () {
+
+                // display statistics for the latest
+                var address = $('#stat-game-selector').find(':selected').val();
+                if (address != "" && typeof address !== "undefined") {
+                    drawStatisticsCharts(address);
+                }
+                else {
+                    $('.stat-alert').replaceWith('<div class="stat-alert">﻿<div class="alert alert-warning alert-dismissible" id="stat-alert-msg"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Warning!</strong> Please select a played game if available.</div></div>');
+                    autoCloseAlert('#stat-alert-msg', 10000);
+                }
+
+                return false;
+            });
+
+            // display generated pulls for the selected game
+            $('#post-display-selection').on("click", function () {
+
+                var address = $('#stat-game-selector').find(':selected').val();
+                if (address != "" && typeof address !== "undefined") {
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("MachineSelection", "Statistics")",
+                        data: { address: address },
+                    })
+                        .success(function (response) {
+                            $('#selectionModalBody').replaceWith(response);
+                            $('#selectionModal').modal('toggle');
+                        })
+                        .error(function () {
+                            $('#selectionModalBody').replaceWith('<div class="modal-body" id="selectionModalBody">An error occured.</div>');
+                            $('#selectionModal').modal('toggle');
+                        });
+                }
+                else {
+                    $('.stat-alert').replaceWith('<div class="stat-alert">﻿<div class="alert alert-warning alert-dismissible" id="stat-alert-msg"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Warning!</strong> Please select a played game if available.</div></div>');
+                    autoCloseAlert('#stat-alert-msg', 10000);
+                }
+
+                return false;
+            });
+
+            // closes the warning alert after some delay
+            function autoCloseAlert(selector, delay) {
+                var alert = $(selector).alert();
+                window.setTimeout(function () { alert.alert('close') }, delay);
+            }
+
+            // displays a warning alert
+            function displayBadAddress() {
+                $('.address-alert').replaceWith('<div class="address-alert">﻿<div class="alert alert-warning alert-dismissible" id="address-alert-msg"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Warning!</strong> Please check if the game address is valid.</div></div>');
+                autoCloseAlert('#address-alert-msg', 10000);
+            }
+
+            // displays a warning alert - game not removed
+            function displayGameNotRemoved() {
+                $('.address-alert').replaceWith('<div class="address-alert">﻿<div class="alert alert-warning alert-dismissible" id="address-alert-msg"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Warning!</strong> Game could not be removed from the database. Please check if the game address is valid.</div></div>');
+                autoCloseAlert('#address-alert-msg', 10000);
+            }
+
+
+            // deletes player from the db
+            $('#post-delete').on("click", function () {
+
+                var address = $('#address').val();
+
+                if (address == "" || typeof address === "undefined") {
+                    displayGameNotRemoved();
+                }
+                else {
+                    $.ajax({
+                        type: "POST",
+                        url: "@Url.Action("Delete", "Play")",
+                        data: { address: address },
+                    })
+                        .success(function (response) {
+                            if (response == "True") {
+                                $('.address-alert').replaceWith('<div class="address-alert">﻿<div class="alert alert-success alert-dismissible" id="address-alert-msg"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><strong>Success!</strong> Game <strong>' + address + '</strong> successfully removed from the database..</div></div>');
+                                autoCloseAlert('#address-alert-msg', 10000);
+                                updateStatisticsAddressList();
+                            }
+                            else {
+                                displayGameNotRemoved();
+                            }
+
+                            updateLog();
+                        })
+                        .error(function () {
+                            displayGameNotRemoved();
+                            updateLog();
+                        });
+                }
+                return false;
+            });
+
+        });
+
+    </script>
+}
