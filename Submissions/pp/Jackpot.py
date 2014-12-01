@@ -1,3 +1,4 @@
+address='http://celtra-jackpot.com/'
 __author__ = 'p'
 import requests
 import pickle
@@ -18,23 +19,23 @@ def get_all_data():
     pool = ThreadPool(50)
     for primer in range(10):
         primer_avtomat_poteg.append([])
-        print('http://celtra-jackpot.com/'+str(primer+1)+'/machines')
-        r = requests.get('http://celtra-jackpot.com/'+str(primer+1)+'/machines')
-        p = (int(requests.get('http://celtra-jackpot.com/'+str(primer+1)+'/pulls').text))
+        print(address+str(primer+1)+'/machines')
+        r = requests.get(address+str(primer+1)+'/machines')
+        p = (int(requests.get(address+str(primer+1)+'/pulls').text))
         print(p)
         for avtomat in range(int(r.text)):
             primer_avtomat_poteg[primer].append([])
             print(avtomat+1)
             for poteg in range(p):
                 primer_avtomat_poteg[primer][avtomat].append([])
-                # print ('http://celtra-jackpot.com/'+str(primer+1)+'/'+str(avtomat+1)+'/'+str(poteg+1))
-                # print(int(requests.get('http://celtra-jackpot.com/'+str(primer+1)+'/'+str(avtomat+1)+'/'+str(poteg+1)).text))
+                # print (address+str(primer+1)+'/'+str(avtomat+1)+'/'+str(poteg+1))
+                # print(int(requests.get(address+str(primer+1)+'/'+str(avtomat+1)+'/'+str(poteg+1)).text))
                 #t = threading.Thread(target=worker, args=(primer, avtomat, poteg))
 
                 #thread_list.append(t)
-                #urls.append('http://celtra-jackpot.com/'+str(primer+1)+'/'+str(avtomat+1)+'/'+str(poteg+1))
+                #urls.append(address+str(primer+1)+'/'+str(avtomat+1)+'/'+str(poteg+1))
                 sleep(0.008)
-                primer_avtomat_poteg[primer][avtomat][poteg] = threading.Thread(target=worker2,args=('http://celtra-jackpot.com/'+str(primer+1)+'/'+str(avtomat+1)+'/'+str(poteg+1),0))
+                primer_avtomat_poteg[primer][avtomat][poteg] = threading.Thread(target=worker2,args=(address+str(primer+1)+'/'+str(avtomat+1)+'/'+str(poteg+1),0))
                 primer_avtomat_poteg[primer][avtomat][poteg] = primer_avtomat_poteg[primer][avtomat][poteg].start()
     # for thread in thread_list:
     #     if
@@ -57,7 +58,7 @@ def get_all_data():
 
 def worker(primer, avtomat, poteg):
     try:
-        a = int(requests.get('http://celtra-jackpot.com/'+str(primer+1)+'/'+str(avtomat+1)+'/'+str(poteg+1)).text)
+        a = int(requests.get(address+str(primer+1)+'/'+str(avtomat+1)+'/'+str(poteg+1)).text)
     except:
         print (primer, avtomat, poteg, "NAPAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
         sleep(3)
@@ -102,14 +103,14 @@ def get_value_on():
     sum = 0
     n = 111
     for i in range(n):
-        sum += int(requests.get('http://celtra-jackpot.com/'+str(7)+'/'+str(1)+'/'+str(101)).text)
+        sum += int(requests.get(address+str(7)+'/'+str(1)+'/'+str(101)).text)
     print(sum/n)
 
 def st_prim_avt_pot():
     for primer in range(10):
-        r = requests.get('http://celtra-jackpot.com/'+str(primer+1)+'/machines')
-    p = (int(requests.get('http://celtra-jackpot.com/'+str(primer+1)+'/pulls').text))
-    print('http://celtra-jackpot.com/'+str(primer+1)+'/machines')
+        r = requests.get(address+str(primer+1)+'/machines')
+    p = (int(requests.get(address+str(primer+1)+'/pulls').text))
+    print(address+str(primer+1)+'/machines')
     print(p)
     print(int(r.text))
 
@@ -260,8 +261,8 @@ def delezi_pravilnih_potegov():
             print (len(iskani), sum(iskani)/4, (sum(iskani)/4)/len(iskani))
 
 def igralec(primer):
-    m = int(requests.get('http://celtra-jackpot.com/'+str(primer)+'/machines').text)
-    p = int(requests.get('http://celtra-jackpot.com/'+str(primer)+'/pulls').text)
+    m = int(requests.get(address+str(primer)+'/machines').text)
+    p = int(requests.get(address+str(primer)+'/pulls').text)
     print(m, p)
     ###parametri###
     resolucija = 7
@@ -286,7 +287,7 @@ def igralec(primer):
             if  mov_avg_values[counter]*obcutljivost < mov_avg_values[int(zadnjih_x/2)]:
                 pull_until_change(avtomat +1, counter)
             else:
-                potegi[counter] = int(requests.get('http://celtra-jackpot.com/'+str(primer)+'/'+str(avtomat+1)+'/'+str(counter+1)).text)
+                potegi[counter] = int(requests.get(address+str(primer)+'/'+str(avtomat+1)+'/'+str(counter+1)).text)
                 avtomat_poteg[avtomat][counter] = potegi[counter]
                 counter +=1
         return
@@ -294,7 +295,7 @@ def igralec(primer):
     for avtomat in range(m):
         avtomat_poteg.append([-10000 for i in range(p)])
         for poteg in range(round_robin_length):
-            potegi[counter] = int(requests.get('http://celtra-jackpot.com/'+str(primer)+'/'+str(avtomat+1)+'/'+str(counter+1)).text)
+            potegi[counter] = int(requests.get(address+str(primer)+'/'+str(avtomat+1)+'/'+str(counter+1)).text)
             avtomat_poteg[avtomat][counter] = potegi[counter]
             counter += 1
     zacetni_avtomat = 0
@@ -307,9 +308,11 @@ def igralec(primer):
 
 
 def main(argv):
+    global address
     #compose_pickles()
     #get_value_on()
     #get_all_data()
+    address=argv[2]
     print(argv, argv[1])
     print(igralec(argv[1]))
 
