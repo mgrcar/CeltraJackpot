@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Diagnostics;
 
 namespace CollectResults
 {
@@ -24,7 +25,7 @@ namespace CollectResults
                     for (int e = 1; e <= 10; e++)
                     {
                         string fileName = resultsFolder + @"\" + name + "." + i + "." + e;
-                        if (File.Exists(fileName + ".done")) { successes++; }
+                        if (File.Exists(fileName + ".done")) { successes++; Debug.Assert(File.Exists(fileName + ".rew")); }
                         if (File.Exists(fileName + ".err")) { failures++; }
                         if (File.Exists(fileName + ".rew")) 
                         {
