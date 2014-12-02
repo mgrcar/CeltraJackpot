@@ -66,35 +66,34 @@ namespace CeltraJackpot.Controllers
             int pulls = -1;
             switch (exampleNumber)
             {
-                case 1:
+                case 4://1:
                     pulls = 500;
                     break;
-                case 2:
+                case 10://2:
                     pulls = 10000;
                     break;
-                case 3:
+                case 9://3:
                     pulls = 1000;
                     break;
-                case 4:
+                case 3://4:
                     pulls = 10000;
                     break;
-                case 5:
+                case 6://5:
                     pulls = 10000;
                     break;
-                // time-dependent machines
-                case 6:
+                case 1://6:
                     pulls = 1000;
                     break;
-                case 7:
+                case 7://7:
                     pulls = 15000;
                     break;
-                case 8:
+                case 5://8:
                     pulls = 3000;
                     break;
-                case 9:
+                case 2://9:
                     pulls = 30000;
                     break;
-                case 10:
+                case 8://10:
                     pulls = 30000;
                     break;
             }
@@ -126,35 +125,34 @@ namespace CeltraJackpot.Controllers
             int machines;
             switch (exampleNumber)
             {
-                case 1:
+                case 4://1:
                     machines = 2;
                     break;
-                case 2:
+                case 10://2:
                     machines = 2;
                     break;
-                case 3:
+                case 9://3:
                     machines = 3;
                     break;
-                case 4:
+                case 3://4:
                     machines = 4;
                     break;
-                case 5:
+                case 6://5:
                     machines = 10;
                     break;
-                // time-dependent machines
-                case 6:
+                case 1://6:
                     machines = 2;
                     break;
-                case 7:
+                case 7://7:
                     machines = 2;
                     break;
-                case 8:
+                case 5://8:
                     machines = 3;
                     break;
-                case 9:
+                case 2://9:
                     machines = 4;
                     break;
-                case 10:
+                case 8://10:
                     machines = 10;
                     break;
                 default:
@@ -176,7 +174,7 @@ namespace CeltraJackpot.Controllers
             double progress = (double)pullNumber / (double)pulls;
             switch (exampleNumber) 
             { 
-                case 1: // 300 of 500 pulls
+                case 4://1: // 300 of 500 pulls
                     switch (machineNumber) 
                     { 
                         case 1:
@@ -187,7 +185,7 @@ namespace CeltraJackpot.Controllers
                             break;
                     }
                     break;
-                case 2: // 300 of 10,000 pulls
+                case 10://2: // 300 of 10,000 pulls
                     switch (machineNumber) 
                     {
                         case 1:
@@ -198,7 +196,7 @@ namespace CeltraJackpot.Controllers
                             break;
                     }
                     break;
-                case 3: // 200 of 1,000 pulls
+                case 9://3: // 200 of 1,000 pulls
                     switch (machineNumber)
                     {
                         case 1:
@@ -212,7 +210,7 @@ namespace CeltraJackpot.Controllers
                             break;
                     }
                     break;
-                case 4: // 240 of 10,000 pulls
+                case 3://4: // 240 of 10,000 pulls
                     switch (machineNumber) 
                     {
                         case 1:
@@ -229,7 +227,7 @@ namespace CeltraJackpot.Controllers
                             break;
                     }
                     break;
-                case 5: // 130 of 10,000 pulls
+                case 6://5: // 130 of 10,000 pulls
                     switch (machineNumber) 
                     {
                         case 1:
@@ -264,8 +262,7 @@ namespace CeltraJackpot.Controllers
                             break;
                     }
                     break;
-                // time-dependent machines
-                case 6: // 600 of 1,000 pulls
+                case 1://6: // 600 of 1,000 pulls
                     switch (machineNumber)
                     {
                         case 1:
@@ -278,7 +275,7 @@ namespace CeltraJackpot.Controllers
                             break;
                     }
                     break;
-                case 7: // 525 of 15,000 pulls
+                case 7://7: // 525 of 15,000 pulls
                     switch (machineNumber)
                     {
                         case 1:
@@ -293,7 +290,7 @@ namespace CeltraJackpot.Controllers
                             break;
                     }
                     break;
-                case 8: // 675 of 3,000 pulls
+                case 5://8: // 675 of 3,000 pulls
                     switch (machineNumber)
                     {
                         case 1:
@@ -313,7 +310,7 @@ namespace CeltraJackpot.Controllers
                             break;
                     }
                     break;
-                case 9: // 414 of 30,000 pulls 
+                case 2://9: // 414 of 30,000 pulls 
                     switch (machineNumber)
                     { 
                         case 1:
@@ -334,7 +331,7 @@ namespace CeltraJackpot.Controllers
                             break;
                     }
                     break;
-                case 10: // 540 of 30,000 pulls
+                case 8://10: // 540 of 30,000 pulls
                     switch (machineNumber)
                     { 
                         case 1:
