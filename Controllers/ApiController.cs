@@ -178,10 +178,10 @@ namespace CeltraJackpot.Controllers
                     switch (machineNumber) 
                     { 
                         case 1:
-                            p = 0.40; 
+                            p = 0.45; 
                             break;
                         case 2:
-                            p = 0.60; 
+                            p = 0.25; 
                             break;
                     }
                     break;
@@ -189,10 +189,10 @@ namespace CeltraJackpot.Controllers
                     switch (machineNumber) 
                     {
                         case 1:
-                            p = 0.030; 
+                            p = 0.025; 
                             break;
                         case 2:
-                            p = 0.015; 
+                            p = 0.01; 
                             break;
                     }
                     break;
@@ -200,13 +200,13 @@ namespace CeltraJackpot.Controllers
                     switch (machineNumber)
                     {
                         case 1:
-                            p = 0.20; 
+                            p = 0.1; 
                             break;
                         case 2:
-                            p = 0.15; 
+                            p = 0.2; 
                             break;
                         case 3:
-                            p = 0.10; 
+                            p = 0.1; 
                             break;
                     }
                     break;
@@ -214,13 +214,13 @@ namespace CeltraJackpot.Controllers
                     switch (machineNumber) 
                     {
                         case 1:
-                            p = 0.020; 
-                            break;
-                        case 2:
                             p = 0.019; 
                             break;
+                        case 2:
+                            p = 0.02; 
+                            break;
                         case 3:
-                            p = 0.024; 
+                            p = 0.023; 
                             break;
                         case 4:
                             p = 0.023; 
@@ -231,34 +231,34 @@ namespace CeltraJackpot.Controllers
                     switch (machineNumber) 
                     {
                         case 1:
-                            p = 0.010;
+                            p = 0.008;
                             break;
                         case 2:
-                            p = 0.010; 
+                            p = 0.014; 
                             break;
                         case 3:
-                            p = 0.010; 
+                            p = 0.014; 
                             break;
                         case 4:
-                            p = 0.010; 
+                            p = 0.008; 
                             break;
                         case 5:
-                            p = 0.010;
+                            p = 0.008;
                             break;
                         case 6:
-                            p = 0.010; 
+                            p = 0.008; 
                             break;
                         case 7:
-                            p = 0.010; 
+                            p = 0.008; 
                             break;
                         case 8:
-                            p = 0.010; 
+                            p = 0.008; 
                             break;
                         case 9:
-                            p = 0.010; 
+                            p = 0.008; 
                             break;
                         case 10:
-                            p = 0.013; 
+                            p = 0.008; 
                             break;
                     }
                     break;
@@ -266,12 +266,12 @@ namespace CeltraJackpot.Controllers
                     switch (machineNumber)
                     {
                         case 1:
-                            if (progress < 0.5) { p = 0.6; }
-                            else { p = 0.4; }
+                            if (progress < 0.6) { p = 0.55; }
+                            else { p = 0.5; }
                             break;
                         case 2:
-                            if (progress < 0.5) { p = 0.4; } 
-                            else { p = 0.6; }
+                            if (progress < 0.6) { p = 0.5; } 
+                            else { p = 0.55; }
                             break;
                     }
                     break;
@@ -279,14 +279,14 @@ namespace CeltraJackpot.Controllers
                     switch (machineNumber)
                     {
                         case 1:
-                            if (progress < 0.25) { p = 0.030; }
-                            else if (progress < 0.75) { p = 0.020; }
-                            else { p = 0.030; }
+                            if (progress < 0.33) { p = 0.015; }
+                            else if (progress < 0.66) { p = 0.020; }
+                            else { p = 0.015; }
                             break;
                         case 2:
-                            if (progress < 0.25) { p = 0.015; }
-                            else if (progress < 0.75) { p = 0.040; }
-                            else { p = 0.015; }
+                            if (progress < 0.33) { p = 0.03; }
+                            else if (progress < 0.66) { p = 0.03; }
+                            else { p = 0.01; }
                             break;
                     }
                     break;
@@ -294,19 +294,19 @@ namespace CeltraJackpot.Controllers
                     switch (machineNumber)
                     {
                         case 1:
-                            if (progress < 0.5) { p = 0.2; }
-                            else if (progress < 0.75) { p = 0; }
+                            if (progress < 0.33) { p = 0.2; }
+                            else if (progress < 0.75) { p = 0.25; }
                             else { p = 0.2; }
                             break;
                         case 2:
-                            if (progress < 0.5) { p = 0.15; }
-                            else if (progress < 0.75) { p = 0.3; }
-                            else { p = 0; }
+                            if (progress < 0.33) { p = 0.3; }
+                            else if (progress < 0.75) { p = 0.25; }
+                            else { p = 0.2; }
                             break;
                         case 3:
-                            if (progress < 0.5) { p = 0.1; }
-                            else if (progress < 0.75) { p = 0.1; }
-                            else { p = 0.1; }
+                            if (progress < 0.33) { p = 0; }
+                            else if (progress < 0.75) { p = 0.2; }
+                            else { p = 0.25; }
                             break;
                     }
                     break;
@@ -314,20 +314,20 @@ namespace CeltraJackpot.Controllers
                     switch (machineNumber)
                     { 
                         case 1:
-                            if (progress < 0.4) { p = 0; }
-                            else { p = 0.02; }
+                            if (progress < 0.23) { p = 0; }
+                            else { p = 0; }
                             break;
                         case 2:
-                            if (progress < 0.4) { p = 0; }
+                            if (progress < 0.23) { p = 0; }
                             else { p = 0; }
                             break;
                         case 3:
-                            if (progress < 0.4) { p = 0; }
-                            else { p = 0.023; }
+                            if (progress < 0.23) { p = 0; }
+                            else { p = 0; }
                             break;
                         case 4:
-                            if (progress < 0.4) { p = 0; }
-                            else { p = 0; }
+                            if (progress < 0.23) { p = 0; }
+                            else { p = 0.03; }
                             break;
                     }
                     break;
@@ -335,64 +335,64 @@ namespace CeltraJackpot.Controllers
                     switch (machineNumber)
                     { 
                         case 1:
-                            if (progress < 0.2) { p = 0.01; }
-                            else if (progress < 0.4) { p = 0.02; }
-                            else if (progress < 0.8) { p = 0.01; }
-                            else { p = 0.01; }
+                            if (progress < 0.23) { p = 0.015; }
+                            else if (progress < 0.55) { p = 0.03; }
+                            else if (progress < 0.77) { p = 0.03; }
+                            else { p = 0.015; }
                             break;
                         case 2:
-                            if (progress < 0.2) { p = 0.01; }
-                            else if (progress < 0.4) { p = 0.01; }
-                            else if (progress < 0.8) { p = 0.02; }
-                            else { p = 0.01; }
+                            if (progress < 0.23) { p = 0.015; }
+                            else if (progress < 0.55) { p = 0.03; }
+                            else if (progress < 0.77) { p = 0.03; }
+                            else { p = 0.015; }
                             break;
                         case 3:
-                            if (progress < 0.2) { p = 0.01; }
-                            else if (progress < 0.4) { p = 0.02; }
-                            else if (progress < 0.8) { p = 0.01; }
-                            else { p = 0.01; }
+                            if (progress < 0.23) { p = 0.015; }
+                            else if (progress < 0.55) { p = 0.015; }
+                            else if (progress < 0.77) { p = 0.03; }
+                            else { p = 0.03; }
                             break;
                         case 4:
-                            if (progress < 0.2) { p = 0.01; }
-                            else if (progress < 0.4) { p = 0.01; }
-                            else if (progress < 0.8) { p = 0.01; }
-                            else { p = 0.02; }
+                            if (progress < 0.23) { p = 0.015; }
+                            else if (progress < 0.55) { p = 0.015; }
+                            else if (progress < 0.77) { p = 0.03; }
+                            else { p = 0.03; }
                             break;
                         case 5:
-                            if (progress < 0.2) { p = 0.01; }
-                            else if (progress < 0.4) { p = 0.01; }
-                            else if (progress < 0.8) { p = 0.01; }
-                            else { p = 0.02; }
+                            if (progress < 0.23) { p = 0.015; }
+                            else if (progress < 0.55) { p = 0.015; }
+                            else if (progress < 0.77) { p = 0.03; }
+                            else { p = 0.015; }
                             break;
                         case 6:
-                            if (progress < 0.2) { p = 0.01; }
-                            else if (progress < 0.4) { p = 0.01; }
-                            else if (progress < 0.8) { p = 0.01; }
-                            else { p = 0.02; }
+                            if (progress < 0.23) { p = 0.015; }
+                            else if (progress < 0.55) { p = 0.03; }
+                            else if (progress < 0.77) { p = 0.03; }
+                            else { p = 0.015; }
                             break;
                         case 7:
-                            if (progress < 0.2) { p = 0.01; }
-                            else if (progress < 0.4) { p = 0.02; }
-                            else if (progress < 0.8) { p = 0.01; }
-                            else { p = 0.01; }
+                            if (progress < 0.23) { p = 0.015; }
+                            else if (progress < 0.55) { p = 0.03; }
+                            else if (progress < 0.77) { p = 0.03; }
+                            else { p = 0.03; }
                             break;
                         case 8:
-                            if (progress < 0.2) { p = 0.01; }
-                            else if (progress < 0.4) { p = 0.02; }
-                            else if (progress < 0.8) { p = 0.01; }
-                            else { p = 0.01; }
+                            if (progress < 0.23) { p = 0.015; }
+                            else if (progress < 0.55) { p = 0.03; }
+                            else if (progress < 0.77) { p = 0.03; }
+                            else { p = 0.03; }
                             break;
                         case 9:
-                            if (progress < 0.2) { p = 0.01; }
-                            else if (progress < 0.4) { p = 0.01; }
-                            else if (progress < 0.8) { p = 0.02; }
-                            else { p = 0.01; }
+                            if (progress < 0.23) { p = 0.015; }
+                            else if (progress < 0.55) { p = 0.015; }
+                            else if (progress < 0.77) { p = 0.03; }
+                            else { p = 0.015; }
                             break;
                         case 10:
-                            if (progress < 0.2) { p = 0.01; }
-                            else if (progress < 0.4) { p = 0.01; }
-                            else if (progress < 0.8) { p = 0.02; }
-                            else { p = 0.01; }
+                            if (progress < 0.23) { p = 0.015; }
+                            else if (progress < 0.55) { p = 0.015; }
+                            else if (progress < 0.77) { p = 0.03; }
+                            else { p = 0.015; }
                             break;                    
                     }
                     break;
