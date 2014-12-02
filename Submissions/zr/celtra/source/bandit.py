@@ -28,7 +28,7 @@ def bandit(url):
             try:
                 pull = int(urllib.request.urlopen(url + "/" + str(selected + 1) + "/" + str(j + 1)).read())
             except URLError as e:
-                print("Srežnik ni odgovoril, poskušam ponovno.")
+                print("Sreznik ni odgovoril, poskusam ponovno.")
                 if trys >= 5:
                     print("NAPAKA V POVEZAVI!")
                     return -1
@@ -44,4 +44,4 @@ def bandit(url):
 if __name__ == '__main__':
     rez = bandit(sys.argv[1])
     if rez != -1:
-        print("Število uspešnih potegov = " + str(rez))
+        print("Stevilo uspesnih potegov = " + str(rez))
