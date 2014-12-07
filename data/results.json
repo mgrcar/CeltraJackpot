@@ -13,94 +13,184 @@
 	"GZ": [1.0, 1.0, 1.0, 1.0, 0.0],
 	"AH": [1.0, 1.0, 1.0, 1.0, 0.5]
 },
+"test": [
+	{
+	"name":       "AH",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     3462.40,
+	"stderr":     5.46
+	},
+	{
+	"name":       "GZ",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     3378.47,
+	"stderr":     7.12
+	},
+	{
+	"name":       "KG",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     3271.41,
+	"stderr":     14.05
+	},
+	{
+	"name":       "MK",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     3018.05,
+	"stderr":     5.44
+	},
+	{
+	"name":       "PP",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     2962.81,
+	"stderr":     5.29
+	},
+	{
+	"name":       "RB",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     2912.56,
+	"stderr":     5.32
+	},
+	{
+	"name":       "RL",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     3116.76,
+	"stderr":     8.31
+	},
+	{
+	"name":       "SJ",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     3277.46,
+	"stderr":     7.72
+	},
+	{
+	"name":       "TC",
+	"successes":  808,
+	"failures":   0,
+	"completed":  80,
+	"reward":     2909.96,
+	"stderr":     5.27
+	},
+	{
+	"name":       "TV",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     3560.23,
+	"stderr":     7.07
+	},
+	{
+	"name":       "ZR",
+	"successes":  334,
+	"failures":   0,
+	"completed":  33,
+	"reward":     3106.27,
+	"stderr":     21.17
+	}
+],
 "eval": [
-{
-"name":       "AH",
-"successes":  1000,
-"failures":   0,
-"completed":  100,
-"reward":     3928.22,
-"stderr":     5.59
-},
-{
-"name":       "GZ",
-"successes":  1000,
-"failures":   0,
-"completed":  100,
-"reward":     3646.46,
-"stderr":     7.10
-},
-{
-"name":       "KG",
-"successes":  1000,
-"failures":   0,
-"completed":  100,
-"reward":     3936.83,
-"stderr":     11.88
-},
-{
-"name":       "MK",
-"successes":  1000,
-"failures":   0,
-"completed":  100,
-"reward":     3475.22,
-"stderr":     5.51
-},
-{
-"name":       "PP",
-"successes":  1000,
-"failures":   0,
-"completed":  100,
-"reward":     2962.69,
-"stderr":     4.35
-},
-{
-"name":       "RB",
-"successes":  1000,
-"failures":   0,
-"completed":  100,
-"reward":     3046.87,
-"stderr":     5.43
-},
-{
-"name":       "RL",
-"successes":  1000,
-"failures":   0,
-"completed":  100,
-"reward":     2971.74,
-"stderr":     4.83
-},
-{
-"name":       "SJ",
-"successes":  1000,
-"failures":   0,
-"completed":  100,
-"reward":     3512.74,
-"stderr":     7.17
-},
-{
-"name":       "TC",
-"successes":  749,
-"failures":   0,
-"completed":  74,
-"reward":     3151.03,
-"stderr":     5.71
-},
-{
-"name":       "TV",
-"successes":  1000,
-"failures":   0,
-"completed":  100,
-"reward":     4032.47,
-"stderr":     6.78
-},
-{
-"name":       "ZR",
-"successes":  505,
-"failures":   0,
-"completed":  50,
-"reward":     3829.70,
-"stderr":     23.01
-}
+	{
+	"name":       "AH",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     3928.22,
+	"stderr":     5.59
+	},
+	{
+	"name":       "GZ",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     3646.46,
+	"stderr":     7.10
+	},
+	{
+	"name":       "KG",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     3936.83,
+	"stderr":     11.88
+	},
+	{
+	"name":       "MK",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     3475.22,
+	"stderr":     5.51
+	},
+	{
+	"name":       "PP",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     2962.69,
+	"stderr":     4.35
+	},
+	{
+	"name":       "RB",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     3046.87,
+	"stderr":     5.43
+	},
+	{
+	"name":       "RL",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     2971.74,
+	"stderr":     4.83
+	},
+	{
+	"name":       "SJ",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     3512.74,
+	"stderr":     7.17
+	},
+	{
+	"name":       "TC",
+	"successes":  749,
+	"failures":   0,
+	"completed":  74,
+	"reward":     3151.03,
+	"stderr":     5.71
+	},
+	{
+	"name":       "TV",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     4032.47,
+	"stderr":     6.78
+	},
+	{
+	"name":       "ZR",
+	"successes":  505,
+	"failures":   0,
+	"completed":  50,
+	"reward":     3829.70,
+	"stderr":     23.01
+	}
 ]
 }

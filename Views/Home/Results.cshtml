@@ -27,11 +27,11 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Tekmovalec</th>
-            <th>Število ponovitev</th>
-            <th>Povprečna nagrada</th>
-            <th>Standardna napaka</th>
-            <th>Kvalitativna ocena</th>
+            <th data-sortable="true">Tekmovalec</th>
+            <th data-sortable="true">Število ponovitev</th>
+            <th data-sortable="true">Povprečna nagrada</th>
+            <th data-sortable="true">Standardna napaka</th>
+            <th data-sortable="true" data-sorter="starSorter">Kvalitativna ocena</th>
         </tr>
     </thead>
     <tbody id="table-test">
@@ -77,6 +77,17 @@ $(function() {
                     <td>" + data.eval[i].reward.toFixed(2) + "</td>\
                     <td>" + data.eval[i].stderr.toFixed(2) + "</td>\
                     <td>" + stars(data.qual[data.eval[i].name]) + "</td>\
+                </tr>\
+            ");
+        }
+        for (var i in data.test) {
+            $("#table-test").append("\
+                <tr>\
+                    <td>" + data.test[i].name + "</td>\
+                    <td>" + data.test[i].completed + "</td>\
+                    <td>" + data.test[i].reward.toFixed(2) + "</td>\
+                    <td>" + data.test[i].stderr.toFixed(2) + "</td>\
+                    <td>" + stars(data.qual[data.test[i].name]) + "</td>\
                 </tr>\
             ");
         }
