@@ -1,0 +1,106 @@
+{
+"qual": {
+	"TV": [1.0, 0.5, 1.0, 1.0, 1.0],
+	"TJ": [0.5, 1.0, 1.0, 0.0, 1.0],
+	"ZR": [1.0, 1.0, 1.0, 1.0, 0.0],
+	"TC": [1.0, 1.0, 1.0, 1.0, 0.0],
+	"SJ": [1.0, 0.5, 1.0, 1.0, 0.0],
+	"RL": [1.0, 0.5, 0.0, 1.0, 0.0],
+	"RB": [0.0, 0.0, 1.0, 1.0, 0.0],
+	"PP": [0.0, 0.0, 0.0, 0.0, 0.0],
+	"MK": [0.5, 1.0, 0.0, 1.0, 0.0],
+	"KG": [1.0, 0.0, 1.0, 1.0, 0.0],
+	"GZ": [1.0, 1.0, 1.0, 1.0, 0.0],
+	"AH": [1.0, 1.0, 1.0, 1.0, 0.5]
+},
+"eval": [
+{
+"name":       "AH",
+"successes":  1000,
+"failures":   0,
+"completed":  100,
+"reward":     3928.22,
+"stderr":     5.59
+},
+{
+"name":       "GZ",
+"successes":  1000,
+"failures":   0,
+"completed":  100,
+"reward":     3646.46,
+"stderr":     7.10
+},
+{
+"name":       "KG",
+"successes":  1000,
+"failures":   0,
+"completed":  100,
+"reward":     3936.83,
+"stderr":     11.88
+},
+{
+"name":       "MK",
+"successes":  1000,
+"failures":   0,
+"completed":  100,
+"reward":     3475.22,
+"stderr":     5.51
+},
+{
+"name":       "PP",
+"successes":  1000,
+"failures":   0,
+"completed":  100,
+"reward":     2962.69,
+"stderr":     4.35
+},
+{
+"name":       "RB",
+"successes":  1000,
+"failures":   0,
+"completed":  100,
+"reward":     3046.87,
+"stderr":     5.43
+},
+{
+"name":       "RL",
+"successes":  1000,
+"failures":   0,
+"completed":  100,
+"reward":     2971.74,
+"stderr":     4.83
+},
+{
+"name":       "SJ",
+"successes":  1000,
+"failures":   0,
+"completed":  100,
+"reward":     3512.74,
+"stderr":     7.17
+},
+{
+"name":       "TC",
+"successes":  749,
+"failures":   0,
+"completed":  74,
+"reward":     3151.03,
+"stderr":     5.71
+},
+{
+"name":       "TV",
+"successes":  1000,
+"failures":   0,
+"completed":  100,
+"reward":     4032.47,
+"stderr":     6.78
+},
+{
+"name":       "ZR",
+"successes":  505,
+"failures":   0,
+"completed":  50,
+"reward":     3829.70,
+"stderr":     23.01
+}
+]
+}

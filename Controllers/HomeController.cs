@@ -9,5 +9,11 @@ namespace CeltraJackpot.Controllers
             ViewBag.Title = "IZZIV 1: Jackpot";
             return View();
         }
+
+        public ActionResult Results()
+        {
+            ViewBag.Title = "IZZIV 1: Jackpot";
+            return View();
+        }
     }
 }

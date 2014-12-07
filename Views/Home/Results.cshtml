@@ -1,0 +1,90 @@
+﻿<h1>CELTRIN PROGRAMERSKI IZZIV</h1>
+
+<h1>IZZIV 1: Jackpot - koliko denarja priigra tvoj algoritem?</h1>
+
+<p><a href="~/Home/Index">« Nazaj na prvo stran</a></p>
+
+<h2>REZULTATI</h2>
+
+<h3>EVALVACIJSKI PRIMERI</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th data-sortable="true">Tekmovalec</th>
+            <th data-sortable="true">Število ponovitev</th>
+            <th data-sortable="true">Povprečna nagrada</th>
+            <th data-sortable="true">Standardna napaka</th>
+            <th data-sortable="true" data-sorter="starSorter">Kvalitativna ocena</th>
+        </tr>
+    </thead>
+    <tbody id="table-eval">
+    </tbody>
+</table>
+
+<h3>TESTNI PRIMERI</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tekmovalec</th>
+            <th>Število ponovitev</th>
+            <th>Povprečna nagrada</th>
+            <th>Standardna napaka</th>
+            <th>Kvalitativna ocena</th>
+        </tr>
+    </thead>
+    <tbody id="table-test">
+    </tbody>
+</table>
+
+@section CustomJs {
+
+var hints = [
+    "Navodila za prevajanje in zagon",
+    "Verzioniranje izvorne kode",
+    "Opis rešitve",
+    "Pravilno delovanje (upoštevanje protokola)",
+    "\"Extra mile\""
+]
+
+function starSorter(a, b) {
+    var sumA = 0; $(a).each(function() { sumA += $(this).data("value"); });
+    var sumB = 0; $(b).each(function() { sumB += $(this).data("value"); });
+    if (sumA > sumB) { return 1; }
+    else if (sumB > sumA) { return -1; }
+    else { return 0; }
+} 
+
+function stars(scores) {
+    var html = "";
+    for (var i in scores) {
+        if (scores[i] == 1) { html += "<img title='" + hints[i] + "' data-value=\"1\" src=\"../img/star-1.png\" />"; }
+        else if (scores[i] == 0.5) { html += "<img title='" + hints[i] + "' data-value=\"0.5\" src=\"../img/star-half.png\" />"; }
+        else { html += "<img title='" + hints[i] + "' data-value=\"0\" src=\"../img/star-0.png\" />"; } 
+    }
+    return html;
+}
+
+$(function() {
+
+    $.getJSON("../data/results.json", function(data) {
+        for (var i in data.eval) {
+            $("#table-eval").append("\
+                <tr>\
+                    <td>" + data.eval[i].name + "</td>\
+                    <td>" + data.eval[i].completed + "</td>\
+                    <td>" + data.eval[i].reward.toFixed(2) + "</td>\
+                    <td>" + data.eval[i].stderr.toFixed(2) + "</td>\
+                    <td>" + stars(data.qual[data.eval[i].name]) + "</td>\
+                </tr>\
+            ");
+        }
+        $("table").bootstrapTable();
+    }).fail(
+        function(msg) { alert(JSON.stringify(msg)); }
+    );
+
+});
+
+}

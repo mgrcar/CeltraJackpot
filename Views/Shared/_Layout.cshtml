@@ -15,5 +15,8 @@
         @* JS *@
         @Scripts.Render("~/js/jquery")
         @Scripts.Render("~/js/bootstrap")
+        <script type="text/javascript">
+            @RenderSection("CustomJs", required: false)
+        </script>
     </body>
 </html>

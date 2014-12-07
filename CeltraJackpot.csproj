@@ -112,9 +112,14 @@
     <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Content Include="css\bootstrap-table.css" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Content Include="img\star-0.png" />
+    <Content Include="img\star-1.png" />
+    <Content Include="img\star-half.png" />
+    <Content Include="js\bootstrap-table.js" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -148,6 +153,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\results.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Results.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
