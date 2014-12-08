@@ -12,6 +12,7 @@
     <thead>
         <tr>
             <th data-sortable="true">Tekmovalec</th>
+            <th data-sortable="true">Osvojeno mesto</th>
             <th data-sortable="true">Število ponovitev</th>
             <th data-sortable="true">Povprečna nagrada</th>
             <th data-sortable="true">Standardna napaka</th>
@@ -22,7 +23,7 @@
     </tbody>
 </table>
 
-<h3>TESTNI PRIMERI</h3>
+<!--<h3>TESTNI PRIMERI</h3>
 
 <table class="table">
     <thead>
@@ -31,12 +32,11 @@
             <th data-sortable="true">Število ponovitev</th>
             <th data-sortable="true">Povprečna nagrada</th>
             <th data-sortable="true">Standardna napaka</th>
-            <th data-sortable="true" data-sorter="starSorter">Kvalitativna ocena</th>
         </tr>
     </thead>
     <tbody id="table-test">
     </tbody>
-</table>
+</table>-->
 
 @section CustomJs {
 
@@ -73,6 +73,7 @@ $(function() {
             $("#table-eval").append("\
                 <tr>\
                     <td>" + data.eval[i].name + "</td>\
+                    <td>" + data.rank[data.eval[i].name] + "</td>\
                     <td>" + data.eval[i].completed + "</td>\
                     <td>" + data.eval[i].reward.toFixed(2) + "</td>\
                     <td>" + data.eval[i].stderr.toFixed(2) + "</td>\
@@ -80,17 +81,16 @@ $(function() {
                 </tr>\
             ");
         }
-        for (var i in data.test) {
+        /*for (var i in data.test) {
             $("#table-test").append("\
                 <tr>\
                     <td>" + data.test[i].name + "</td>\
                     <td>" + data.test[i].completed + "</td>\
                     <td>" + data.test[i].reward.toFixed(2) + "</td>\
                     <td>" + data.test[i].stderr.toFixed(2) + "</td>\
-                    <td>" + stars(data.qual[data.test[i].name]) + "</td>\
                 </tr>\
             ");
-        }
+        }*/
         $("table").bootstrapTable();
     }).fail(
         function(msg) { alert(JSON.stringify(msg)); }

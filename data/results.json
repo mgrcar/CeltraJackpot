@@ -13,6 +13,21 @@
 	"GZ": [1.0, 1.0, 1.0, 1.0, 0.0],
 	"AH": [1.0, 1.0, 1.0, 1.0, 0.5]
 },
+"rank": {
+	"TV": 1,
+	"TJ": 0,
+	"ZR": 4,
+	"TC": 8,
+	"SJ": 6,
+	"RL": 11,
+	"RB": 10,
+	"PP": 12,
+	"MK": 7,
+	"KG": 3,
+	"GZ": 5,
+	"AH": 2,
+	"TJ": 9
+},
 "test": [
 	{
 	"name":       "AH",
@@ -141,8 +156,8 @@
 	"successes":  1000,
 	"failures":   0,
 	"completed":  100,
-	"reward":     2962.69,
-	"stderr":     4.35
+	"reward":     2959.49,
+	"stderr":     5.47
 	},
 	{
 	"name":       "RB",
@@ -170,11 +185,19 @@
 	},
 	{
 	"name":       "TC",
-	"successes":  749,
+	"successes":  1000,
 	"failures":   0,
-	"completed":  74,
-	"reward":     3151.03,
-	"stderr":     5.71
+	"completed":  100,
+	"reward":     3143.87,
+	"stderr":     5.53
+	},
+	{
+	"name":       "TJ",
+	"successes":  1000,
+	"failures":   0,
+	"completed":  100,
+	"reward":     3070.80,
+	"stderr":     5.35
 	},
 	{
 	"name":       "TV",
@@ -186,11 +209,11 @@
 	},
 	{
 	"name":       "ZR",
-	"successes":  505,
+	"successes":  1000,
 	"failures":   0,
-	"completed":  50,
-	"reward":     3829.70,
-	"stderr":     23.01
+	"completed":  100,
+	"reward":     3814.52,
+	"stderr":     15.89
 	}
 ]
 }
