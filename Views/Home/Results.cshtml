@@ -23,7 +23,7 @@
     </tbody>
 </table>
 
-<!--<h3>TESTNI PRIMERI</h3>
+<h3>TESTNI PRIMERI</h3>
 
 <table class="table">
     <thead>
@@ -36,7 +36,9 @@
     </thead>
     <tbody id="table-test">
     </tbody>
-</table>-->
+</table>
+
+<p>&nbsp;</p>
 
 @section CustomJs {
 
@@ -45,7 +47,8 @@ var hints = [
     "Verzioniranje izvorne kode",
     "Opis rešitve",
     "Pravilno delovanje (upoštevanje protokola)",
-    "\"Extra mile\""
+    "\"Extra mile\"",
+    "Predstavitev pred komisijo"
 ]
 
 function starSorter(a, b) {
@@ -81,7 +84,7 @@ $(function() {
                 </tr>\
             ");
         }
-        /*for (var i in data.test) {
+        for (var i in data.test) {
             $("#table-test").append("\
                 <tr>\
                     <td>" + data.test[i].name + "</td>\
@@ -90,7 +93,7 @@ $(function() {
                     <td>" + data.test[i].stderr.toFixed(2) + "</td>\
                 </tr>\
             ");
-        }*/
+        }
         $("table").bootstrapTable();
     }).fail(
         function(msg) { alert(JSON.stringify(msg)); }
