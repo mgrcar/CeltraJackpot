@@ -108,17 +108,6 @@ namespace CeltraJackpot.Controllers
             return Content(pulls.ToString(), "text/plain");
         }
 
-        public object Reset()
-        {
-            System.IO.File.Delete(GetFileName("pull"));
-            return Content("OK", "text/plain");
-        }
-
-        public object Who()
-        { 
-            return Content(new FileInfo(GetFileName("pull")).FullName, "text/plain");
-        }
-
         public object Machines(int exampleNumber)
         {
             WriteLogMsg(string.Format("Machines({0}) was called.", exampleNumber));
