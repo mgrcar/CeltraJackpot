@@ -14,18 +14,18 @@
 	"AH": [1.0, 1.0, 1.0, 1.0, 0.5, 1.0]
 },
 "rank": {
-	"TV": 1,
-	"ZR": 4,
-	"TC": 8,
-	"SJ": 6,
-	"RL": 11,
-	"RB": 10,
-	"PP": 12,
-	"MK": 7,
-	"KG": 3,
-	"GZ": 5,
-	"AH": 2,
-	"TJ": 9
+	"TV": 0,
+	"ZR": 3,
+	"TC": 7,
+	"SJ": 5,
+	"RL": 10,
+	"RB": 9,
+	"PP": 11,
+	"MK": 6,
+	"KG": 2,
+	"GZ": 4,
+	"AH": 1,
+	"TJ": 8
 },
 "test": [
 	{
@@ -102,11 +102,11 @@
 	},
 	{
 	"name":       "TJ",
-	"successes":  684,
-	"failures":   68,
-	"completed":  68,
-	"reward":     2812.28,
-	"stderr":     5.94
+	"successes":  1000,
+	"failures":   100,
+	"completed":  100,
+	"reward":     2812.18,
+	"stderr":     4.85
 	},
 	{
 	"name":       "TV",
@@ -118,11 +118,11 @@
 	},
 	{
 	"name":       "ZR",
-	"successes":  539,
+	"successes":  1000,
 	"failures":   0,
-	"completed":  53,
-	"reward":     3092.25,
-	"stderr":     16.25
+	"completed":  100,
+	"reward":     3090.49,
+	"stderr":     11.57
 	}
 ],
 "eval": [
