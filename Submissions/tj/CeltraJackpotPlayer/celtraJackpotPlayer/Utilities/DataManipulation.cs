@@ -95,10 +95,12 @@ namespace celtraJackpotPlayer.Utilities
 
         public static string _PrepareAddress(string address)
         {
-            address = address.Replace("http:\\\\", "");
-            address = address.Replace("http://", "");
-            address = address.Replace("www.", "");
-            address = "http://www." + address;
+            //address = address.Replace("http:\\\\", "");
+            //address = address.Replace("http://", "");
+            //address = address.Replace("www.", "");
+            //address = "http://www." + address;
+            address = address.Replace("_", "/");
+            address = "http://" + address;
             return address;
         }
 

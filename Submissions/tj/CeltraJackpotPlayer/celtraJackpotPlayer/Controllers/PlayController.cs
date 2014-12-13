@@ -948,7 +948,7 @@ namespace celtraJackpotPlayer.Controllers
         {
             address = Utilities.DataManipulation._PrepareAddress(address);
 
-            Game gameData = _GetGameFromDb(address);
+            Game gameData = null;//_GetGameFromDb(address);
 
             if (gameData == null)
             {
