@@ -4,3 +4,7 @@
 obj/
 bin/
 Results/
+Results_Test/
+Transfer/
+Results_Eval/
+Submissions/Result_Test
